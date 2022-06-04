@@ -1,19 +1,19 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import React, { MouseEventHandler, MouseEvent, useContext } from 'react';
 import Button from '../components/atoms/Button';
 import Logo from '../components/atoms/Logo';
 import Options from '../components/organisms/Options';
-import AppContext from '../contexts/app.context';
 
 import styles from './Home.module.css';
 
 const Home: NextPage = () => {
-  const appContext = useContext(AppContext);
+  const router = useRouter();
 
-  const OnStarGameClickHandler: MouseEventHandler = (event: MouseEvent<HTMLDivElement>) => {
+  const OnStartGameClickHandler: MouseEventHandler = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
-    console.log('Go to game screen');
+    router.push('/game');
   }
 
   return (
@@ -28,7 +28,7 @@ const Home: NextPage = () => {
         <Logo />
         <div className={styles.content}>
           <Options/>
-          <Button variant='primary' large onClick={OnStarGameClickHandler}>Start Game</Button>
+          <Button variant='primary' large onClick={OnStartGameClickHandler}>Start Game</Button>
         </div>
       </main>
     </div>

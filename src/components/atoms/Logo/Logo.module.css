@@ -12,3 +12,8 @@
 .logo.dark {
   color: #152938;
 }
+
+
+.logo.link:hover {
+  cursor: pointer;
+}
