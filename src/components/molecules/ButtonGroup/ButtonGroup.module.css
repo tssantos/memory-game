@@ -1,0 +1,35 @@
+.buttonGroup {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.buttonGroup .label {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 25px;
+
+  height: 25px;
+
+  color: #7191A5;
+
+  margin-bottom: 16px;
+}
+
+.buttonGroup .options {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buttonGroup .options.large > :not(:last-child) {
+  margin-right: 30px;
+}
+
+.buttonGroup .options.small > :not(:last-child) {
+  margin-right: 22px;
+}
