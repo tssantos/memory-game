@@ -1,0 +1,12 @@
+.board {
+  width: fit-content;
+  height: fit-content;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board > :not(:last-child) {
+  margin-right: 30px;
+}

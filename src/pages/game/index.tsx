@@ -1,6 +1,7 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import React, { MouseEventHandler, MouseEvent, useContext } from 'react';
+import Footer from '../../components/organisms/Footer';
 import Header from '../../components/organisms/Header';
 import AppContext from '../../contexts/app.context';
 
@@ -19,6 +20,7 @@ const Game: NextPage = () => {
       <Header/>
       <main className={styles.main}>
       </main>
+      <Footer/>
     </div>
   );
 };

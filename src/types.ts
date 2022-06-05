@@ -33,8 +33,25 @@ export type GameOptionsKeys = 'theme' | 'players' | 'gridSize';
 
 export type IAppContext = {
   options: GameOptions;
+
   setTheme: (value: GameOptionTheme) => void;
   setPlayers: (value: GameOptionPlayers) => void;
   setGridSize: (value: GameOptionGridSize) => void;
-  get: (key: string) => any;
+
+  state: GameState;
+  startGame: () => void;
+  
 };
+
+export interface PlayerState {
+  index: number;
+  pairs: number;
+}
+
+export interface GameState {
+  running: boolean;
+  elapsedTime: number;
+  moves: number;
+  players: PlayerState[];
+  currPlayer: number;
+}
