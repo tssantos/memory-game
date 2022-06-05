@@ -1,6 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
-import React, { MouseEventHandler, MouseEvent, useContext } from 'react';
+import { useRouter } from 'next/router';
+import React, { MouseEventHandler, MouseEvent, useContext, useEffect } from 'react';
+import Board from '../../components/organisms/Board';
 import Footer from '../../components/organisms/Footer';
 import Header from '../../components/organisms/Header';
 import AppContext from '../../contexts/app.context';
@@ -9,6 +11,13 @@ import styles from './Game.module.css';
 
 const Game: NextPage = () => {
   const appContext = useContext(AppContext);
+  const router = useRouter();
+
+  useEffect(() => {
+    if (Object.entries(appContext.board).length == 0) {
+      router.push('/');
+    }
+  })
 
   return (
     <div className={styles.game}>
@@ -19,6 +28,7 @@ const Game: NextPage = () => {
       </Head>
       <Header/>
       <main className={styles.main}>
+        <Board/>
       </main>
       <Footer/>
     </div>

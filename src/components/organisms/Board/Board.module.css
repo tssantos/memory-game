@@ -1,0 +1,15 @@
+.board,
+.board.large {
+  height: 572px;
+  width: 572px;
+
+  display: flex;
+  flex-wrap: wrap;
+  align-content: space-between;
+  justify-content: space-between;
+}
+
+.board.small {
+  height: 532px;
+  width: 532px;
+}

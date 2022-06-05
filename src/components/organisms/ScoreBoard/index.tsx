@@ -19,13 +19,13 @@ const ScoreBoard = (props: ScoreBoardProps) => {
       </>
       }
       {appContext.options.players > 1 && <>
-        {appContext.state.players.map(player =>
+        {Object.entries(appContext.players).map(([index, player]) =>
           <ScoreCard
-            key={`player-${player.index + 1}`}
+            key={`player-${+index + 1}`}
             multiplayer
-            label={`Player ${player.index + 1}`}
+            label={`Player ${+index + 1}`}
             value={player.pairs}
-            current={appContext.state.currPlayer == player.index}
+            current={appContext.state.currPlayer == +index}
           />
         )}
       </>

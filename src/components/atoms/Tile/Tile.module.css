@@ -1,0 +1,68 @@
+.tile {
+  width: 82px;
+  height: 82px;
+  border-radius: 50%;
+
+  background-color: #304859;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 500ms ease-in-out, background-color 0s 250ms;
+}
+
+.tile:hover {
+  cursor: pointer;
+}
+
+.tile.selected {
+  background-color: #FDA214;
+  transform: rotateY(180deg);
+  transition: transform 500ms ease-in-out, background-color 0s 250ms;
+}
+
+.tile.opened {
+  background-color: #BCCED9;
+  transform: rotateY(180deg);
+  transition: transform 500ms ease-in-out;
+}
+
+.tile .content {
+  width: fit-content;
+  height: fit-content;
+  transform: rotateY(180deg);
+  opacity: 0;
+}
+
+.tile.opened .content,
+.tile.selected .content {
+  opacity: 1;
+  transition: opacity 250ms 250ms;
+}
+
+.tile .content p {
+  font-weight: 700;
+  font-size: 44px;
+  line-height: 55px;
+
+  color: #fcfcfc;
+}
+
+.tile .content svg {
+  width: 40px;
+  height: 40px;
+}
+
+.tile svg path {
+  fill: #fcfcfc;
+}
+
+.tile.large {
+  width: 118px;
+  height: 118px;
+}
+
+.tile.large svg {
+  width: 56px;
+  height: 56px;
+}
