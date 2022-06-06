@@ -14,7 +14,7 @@ const Board = (props: BoardProps) => {
   return (
     <div className={`${styles.board} ${styles[boardSize]}`}>
       {Object.keys(appContext.board).map(index => (
-        <Tile index={+index}/>
+        <Tile key={`tile-${index}`}index={+index}/>
       ))}
     </div>
   );
