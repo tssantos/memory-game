@@ -1,5 +1,5 @@
 import React from 'react';
-import ScoreBoard from '../ScoreBoard';
+import ScoreBoard from '../../molecules/ScoreBoard';
 
 import styles from './Footer.module.css';
 

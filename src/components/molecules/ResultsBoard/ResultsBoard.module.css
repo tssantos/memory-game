@@ -1,0 +1,39 @@
+.board {
+  width: 100%;
+  height: fit-content;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.board h1 {
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 60px;
+  text-align: center;
+
+  color: #152938;
+
+  margin-bottom: 16px;
+}
+
+.board h2 {
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+
+  color: #7191a5;
+
+  margin-bottom: 40px;
+}
+
+.board .summary {
+  width: 100%;
+}
+
+.board .summary > :not(:last-child) {
+  margin-bottom: 16px;
+}

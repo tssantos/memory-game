@@ -1,6 +1,8 @@
 import { GameOptionGridSize, GameOptionPlayers, GameOptions, GameOptionTheme, GameState, GameTileIconsMap, IAppContext, PlayerState, TileState } from '../types';
 import React, { PropsWithChildren, useEffect, useState } from 'react';
 import { CreateShuffledTiles } from '../utils';
+import Timer from '../components/atoms/Timer';
+import { useStopwatch } from 'react-timer-hook';
 
 const defaultGameOptions: GameOptions = {
   theme: 'numbers',
@@ -36,12 +38,12 @@ export type AppContextGetter = 'options.theme' | 'options.players' | 'options.gr
 export type AppContextSetter = 'setTheme' | 'options.players' | 'options.gridSize';
 
 export const AppProvider = (props: PropsWithChildren<{}>) => {
+  const { seconds, start: startTimer, pause: pauseTimer,  } = useStopwatch({ autoStart: false });
 
   const [options, setOptions] = useState(defaultGameOptions);
   const [state, setState] = useState(defaultGameState);
   const [board, setBoard] = useState([] as Record<number, TileState>);
   const [players, setPlayers] = useState([] as Record<number, PlayerState>);
-  let interval: NodeJS.Timer;
 
   const setThemeOption = (newTheme: GameOptionTheme) => {
     setOptions(options => ({ ...options, theme: newTheme }));
@@ -58,7 +60,7 @@ export const AppProvider = (props: PropsWithChildren<{}>) => {
   const startGame = () => {
     const players: PlayerState[] = [];
     for (let index = 0; index < options.players; index += 1) {
-      players[index] = { pairs: 0 };
+      players[index] = { index, pairs: 0 };
     }
     const tiles = CreateShuffledTiles(options.gridSize == '4x4' ? 16 : 36);
     const board: TileState[] = [];
@@ -81,6 +83,7 @@ export const AppProvider = (props: PropsWithChildren<{}>) => {
       firstChoice: undefined,
       secondChoice: undefined,
     });
+    startTimer();
   };
 
   const setTileProperty = (index: number, partial: Partial<TileState>) => {
@@ -121,8 +124,8 @@ export const AppProvider = (props: PropsWithChildren<{}>) => {
       }));
       const closedTiles = Object.values(board).filter(tile => !tile.opened).map(tile => tile.index);
       const isFinished = (closedTiles.length == 2 &&
-          (closedTiles.find(tile => tile == state.firstChoice) != undefined) &&
-          (closedTiles.find(tile => tile == state.secondChoice) != undefined))
+        (closedTiles.find(tile => tile == state.firstChoice) != undefined) &&
+        (closedTiles.find(tile => tile == state.secondChoice) != undefined));
       setState(state => ({
         ...state,
         status: isFinished ? 'finished' : 'running',
@@ -131,27 +134,25 @@ export const AppProvider = (props: PropsWithChildren<{}>) => {
         firstChoice: undefined,
         secondChoice: undefined
       }));
+      if (isFinished) {
+        pauseTimer();
+      }
     }
   };
-
-  // const timerTick = () => {
-  //   setState(state => ({ ...state, elapsedTime: state.elapsedTime + (state.status == 'running' ? 1 : 0) }));
-  // };
 
   useEffect(() => {
     if (state.firstChoice != undefined && state.secondChoice != undefined) {
       setTimeout(evaluateTurn, 500);
     }
-    // interval = setInterval(timerTick, 1000);
-    // return () => {
-      // clearInterval(interval);
-    // };
   });
 
   return (
     <AppContext.Provider value={{
       options,
-      state,
+      state: {
+        ...state,
+        elapsedTime: seconds
+      },
       board,
       players,
       setTheme: setThemeOption,

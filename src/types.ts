@@ -52,6 +52,7 @@ export type IAppContext = {
 };
 
 export interface PlayerState {
+  index: number;
   pairs: number;
 }
 

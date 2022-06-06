@@ -8,7 +8,6 @@ import styles from './ScoreBoard.module.css';
 interface ScoreBoardProps { }
 
 const ScoreBoard = (props: ScoreBoardProps) => {
-  const [currPlayer, setCurrPlayer] = useState(0);
   const appContext = useContext(AppContext);
 
   return (

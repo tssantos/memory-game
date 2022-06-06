@@ -26,7 +26,7 @@ const Tile = (props: TileProps) => {
     <div onClick={onTileClick} data-index={props.index}
       className={`${styles.tile} ${styles[tileSize]} ${tile.selected && styles.selected || ''} ${tile.opened && styles.opened || ''}`}>
       <div className={styles.content}>
-        {appContext.options.theme == 'numbers' && (tile.opened || tile.selected) && <p>{tile.value}</p>}
+        {appContext.options.theme == 'numbers' && (tile.opened || tile.selected) && <p>{tile.value + 1}</p>}
         {appContext.options.theme == 'icons' && (tile.opened || tile.selected) && <FontAwesomeIcon icon={tile.icon} />}
       </div>
     </div>
